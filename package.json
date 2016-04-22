@@ -1,0 +1,27 @@
+{
+  "name": "noahs-app-backend",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ./**/*.js || true",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sumato-Mizu/noahs-app-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sumato-Mizu/noahs-app-backend/issues"
+  },
+  "homepage": "https://github.com/Sumato-Mizu/noahs-app-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "morgan": "^1.7.0",
+    "nodemon": "^1.9.1"
+  }
+}
