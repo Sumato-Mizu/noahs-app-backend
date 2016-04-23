@@ -2,35 +2,40 @@ const request = require("request");
 const fmiBaseUrl = "http://data.fmi.fi/fmi-apikey/";
 const XmlParser = require("../services/XmlParser");
 
+function checkIfValidParams(reqbody) {
+  return !(typeof reqbody.apikey === "undefined" || typeof reqbody.query === "undefined" || reqbody.apikey === null || reqbody.query === null);
+}
+
 module.exports.getXML = (req, res) => {
-  if (typeof req.body.apikey !== "undefined" && typeof req.body.query !== "undefined") {
+  console.log(req.body);
+  if (checkIfValidParams(req.body)) {
     const queryUrl = fmiBaseUrl+req.body.apikey+req.body.query;
     request(queryUrl, (error, response, body) => {
       if (!error && response.statusCode === 200) {
-        const tiflinks;
         XmlParser.readXml(body)
         .then(result => {
           console.log(result)
           res.send({
+            fmilink: queryUrl,
             tiflinks: result,
           })
         })
         .catch(err => {
-          res.send({
+          res.status(500).send({
             message: "xml parser failed",
             error: err
           })
         })
       } else {
-        res.send({
+        res.status(400).send({
           message: "request to " + queryUrl + " failed",
           error: error,
         })
       }
     })
   } else {
-    res.send({
-      message: "No apikey or query in request params",
+    res.status(400).send({
+      message: "Not valid params",
     })
   }
 }
