@@ -11,6 +11,7 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/fmi", fmiCtrl.parseStuff);
+router.get("/fmi", fmiCtrl.parseXml);
+router.get("/png", fmiCtrl.parsePng);
 
 module.exports = router;
