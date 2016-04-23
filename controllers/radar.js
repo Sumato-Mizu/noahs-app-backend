@@ -12,9 +12,9 @@ module.exports.getXML = (req, res) => {
     const queryUrl = fmiBaseUrl+req.body.apikey+req.body.query;
     request(queryUrl, (error, response, body) => {
       if (!error && response.statusCode === 200) {
-        XmlParser.readXml(body)
+        XmlParser.readTifsFromXml(body)
         .then(result => {
-          console.log(result)
+          // console.log(result)
           res.send({
             fmilink: queryUrl,
             tiflinks: result,
@@ -22,13 +22,13 @@ module.exports.getXML = (req, res) => {
         })
         .catch(err => {
           res.status(500).send({
-            message: "xml parser failed",
+            message: "Parsing of the XML failed",
             error: err
           })
         })
       } else {
         res.status(400).send({
-          message: "request to " + queryUrl + " failed",
+          message: "Request to " + queryUrl + " failed",
           error: error,
         })
       }

@@ -4,7 +4,7 @@ const express = require("express");
 const router = new express.Router();
 
 const fmiCtrl = require("./xml");
-const radar = require("./radar")
+const radarCtrl = require("./radar")
 
 router.get("/", (req, res) => {
   res.json({
@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 
 router.get("/xml", fmiCtrl.parseXml);
 router.get("/png", fmiCtrl.parsePng);
-router.post("/radar", radar.getXML);
+router.post("/radar", radarCtrl.getXML);
 
 
 module.exports = router;
