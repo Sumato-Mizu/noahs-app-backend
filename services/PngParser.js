@@ -15,7 +15,8 @@ class PngParser {
         filterType: 4
       }))
       .on('parsed', function() {
-
+        console.log(this.height);
+        console.log(this.width);
         for (var y = 0; y < this.height; y++) {
           for (var x = 0; x < this.width; x++) {
             var idx = (this.width * y + x) << 2;
