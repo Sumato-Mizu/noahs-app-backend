@@ -12,11 +12,8 @@ class XmlParser {
   readXmlFile() {
     const parser = new xml2js.Parser();
     fs.readFile("data/fmitestquery.xml", (err, data) => {
-      // console.log(data);
       parser.parseString(data, (err, result) => {
-        //        console.dir(result);
         this.traverseAndFindTifLinks(result)
-          //                console.log(JSON.stringify(result));
       });
     });
   }
@@ -48,7 +45,5 @@ class XmlParser {
     return tifArray;
   }
 }
-
-
 
 module.exports = new XmlParser(config);
